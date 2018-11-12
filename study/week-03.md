@@ -36,7 +36,9 @@
       - unverified -> 인증 X
       - active -> 인증 ok
       - paused -> 휴회원
-      - terminated -> 탈퇴
+      - ~~terminated -> 탈퇴~~ -> 탈퇴 상태는 별도로 두지 않음. 
+        
+        다만 탈퇴시 작성한 글은 소유자가 없는 상태로 계속 유지
 
     - email
     - kweb
@@ -64,7 +66,7 @@
 
     ```typescript
     enum UserStatus {
-        UNVERIFIED, ACTIVE, PAUSED, TERMINATED
+        UNVERIFIED, ACTIVE, PAUSED
     }
     ```
 
