@@ -49,6 +49,17 @@
 
     mysql을 사용함으로 sql 쿼리로 정의
 
+    유저의 비밀번호는 해쉬 알고리즘을 통해 digest 한 hex string을 저장하고 이를 인증에 사용한다.
+
+    간단하게 SHA-512 같은 알려진 해쉬 함수로 한번만 해싱해도 되겠지만 아래 링크된 문서와 같이 단방향 해시 함수 만을 사용하면 충분한 보안 성능을 회득하기 어렵다.
+
+    참고 [안전한 패스워드 저장
+](https://d2.naver.com/helloworld/318732)
+
+    따라서 salting 과 stretching을 통해서 raindow table 이나 brute force 공격에 대응해야 한다.
+
+    직접 구현하기 보다는 이미 검증되고 많이 사용되는 구현체인 scrypt를 사용하기로 한다.
+
     유저 credential은 plain text password를 scrypt 라이브러리에 { N: 17, r: 8, p: 1 } 파라메터로 암호화후 버퍼를 hex 스트링으로 저장 (출력길이 192byte)
 
     ```typescript
